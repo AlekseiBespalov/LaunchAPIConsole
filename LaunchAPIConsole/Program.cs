@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Threading;
-using System.Threading.Tasks;
-using Flurl;
-using Flurl.Http;
+﻿using Flurl.Http;
+using LaunchAPIConsole.ApiModels.LaunchLibrary.Launches;
+using LaunchAPIConsole.ApiModels.SpaceX.Launches;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System;
+using System.Threading.Tasks;
 
 namespace LaunchAPIConsole
 {
@@ -26,13 +23,14 @@ namespace LaunchAPIConsole
 
             //JObject parsedJson = JObject.Parse(output);
 
-            for (int i = 0; i <= LibrarylaunchCollection.launches.Count - 1; i++)
+            for (int i = 0; i <= LibrarylaunchCollection.Launches.Count - 1; i++)
             {
-                Console.WriteLine(LibrarylaunchCollection.launches[i].Id);
-                Console.WriteLine(LibrarylaunchCollection.launches[i].Name);
-                Console.WriteLine(LibrarylaunchCollection.launches[i].Net);
-                Console.WriteLine(LibrarylaunchCollection.launches[i].VidURLs[0]);
-                Console.WriteLine(LibrarylaunchCollection.launches[i].Rocket.Name);
+                Console.WriteLine(LibrarylaunchCollection.Launches[i].LaunchId);
+                Console.WriteLine(LibrarylaunchCollection.Launches[i].LaunchName);
+                Console.WriteLine(LibrarylaunchCollection.Launches[i].LaunchTime);
+                Console.WriteLine(LibrarylaunchCollection.Launches[i].VidUrls[0]);
+                Console.WriteLine(LibrarylaunchCollection.Launches[i].Rocket.Name);
+                Console.WriteLine(LibrarylaunchCollection.Launches[i].Location.CountryCode);
             }
 
             dynamic SpaceXText = await "https://api.spacexdata.com/v3/launches/next".GetJsonAsync();
@@ -40,9 +38,10 @@ namespace LaunchAPIConsole
             SpaceXLaunchModel SpaceXLaunch = JsonConvert.DeserializeObject<SpaceXLaunchModel>(SpaceXoutput);
 
             Console.WriteLine("SPACEX LAUNCH");
-            Console.WriteLine(SpaceXLaunch.Flight_number);
+            Console.WriteLine(SpaceXLaunch.Id);
             Console.WriteLine(SpaceXLaunch.Details);
-            Console.WriteLine(SpaceXLaunch.Rocket.Rocket_Id);
+            Console.WriteLine(SpaceXLaunch.Rocket.RocketId);
+            Console.WriteLine(SpaceXLaunch.LaunchDateLocal);
         }
     }
 }
