@@ -3,10 +3,14 @@ using System;
 
 namespace LaunchAPIConsole.ApiModels.SpaceX.Launches
 {
+    /// <summary>
+    /// GET request for getting one launch
+    /// https://api.spacexdata.com/v3/launches/{{flight_number}}
+    /// </summary>
     public class SpaceXLaunchModel
     {
         [JsonProperty(PropertyName = "flight_number")]
-        public int Id { get; set; }
+        public int FlightId { get; set; }
 
         [JsonProperty(PropertyName = "mission_name")]
         public string MissionName { get; set; }

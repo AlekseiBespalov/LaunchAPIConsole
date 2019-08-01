@@ -22,10 +22,10 @@ namespace LaunchAPIConsole.ApiModels.SpaceX.Launches
         public string PayloadType { get; set; }
 
         [JsonProperty(PropertyName = "payload_mass_kg")]
-        public int PayloadMassKg { get; set; }
+        public float? PayloadMassKg { get; set; }
 
         [JsonProperty(PropertyName = "payload_mass_lbs")]
-        public double PayloadMassLbs { get; set; }
+        public float? PayloadMassLbs { get; set; }
 
         public string Orbit { get; set; }
 

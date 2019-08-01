@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace LaunchAPIConsole.ApiModels.LaunchLibrary.Launches
 {
+    /// <summary>
+    /// GET request
+    /// https://launchlibrary.net/1.4/launch/{id}
+    /// </summary>
     public class LibraryLaunchModel
     {
         [JsonProperty(PropertyName = "id")]

@@ -9,7 +9,7 @@ namespace LaunchAPIConsole.ApiModels.SpaceX.Launches
 
         public string Regime { get; set; }
 
-        public int Longitude { get; set; }
+        public object Longitude { get; set; }
 
         [JsonProperty(PropertyName = "semi_major_axis_km")]
         public object SemiMajorAxisKm { get; set; }
@@ -29,7 +29,7 @@ namespace LaunchAPIConsole.ApiModels.SpaceX.Launches
         public object PeriodMin { get; set; }
 
         [JsonProperty(PropertyName = "lifespan_years")]
-        public int LifespanYears { get; set; }
+        public object LifespanYears { get; set; }
 
         public object Epoch { get; set; }
 

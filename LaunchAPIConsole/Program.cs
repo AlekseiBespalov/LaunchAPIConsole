@@ -3,6 +3,7 @@ using LaunchAPIConsole.ApiModels.LaunchLibrary.Launches;
 using LaunchAPIConsole.ApiModels.SpaceX.Launches;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LaunchAPIConsole
@@ -31,6 +32,7 @@ namespace LaunchAPIConsole
                 Console.WriteLine(LibrarylaunchCollection.Launches[i].VidUrls[0]);
                 Console.WriteLine(LibrarylaunchCollection.Launches[i].Rocket.Name);
                 Console.WriteLine(LibrarylaunchCollection.Launches[i].Location.CountryCode);
+                Console.WriteLine(LibrarylaunchCollection.Launches[i].Location.Pads[0].PadName);
             }
 
             dynamic SpaceXText = await "https://api.spacexdata.com/v3/launches/next".GetJsonAsync();
@@ -38,10 +40,24 @@ namespace LaunchAPIConsole
             SpaceXLaunchModel SpaceXLaunch = JsonConvert.DeserializeObject<SpaceXLaunchModel>(SpaceXoutput);
 
             Console.WriteLine("SPACEX LAUNCH");
-            Console.WriteLine(SpaceXLaunch.Id);
+            Console.WriteLine(SpaceXLaunch.FlightId);
             Console.WriteLine(SpaceXLaunch.Details);
             Console.WriteLine(SpaceXLaunch.Rocket.RocketId);
             Console.WriteLine(SpaceXLaunch.LaunchDateLocal);
+
+            Console.WriteLine("---------------------------------------");
+
+            dynamic SpaceXAllText = await "https://api.spacexdata.com/v3/launches".GetJsonListAsync();
+            string SpaceXAlloutput = JsonConvert.SerializeObject(SpaceXAllText);
+            List<SpaceXLaunchModel> SpaceXAllLaunches = JsonConvert.DeserializeObject<List<SpaceXLaunchModel>>(SpaceXAlloutput);
+
+            foreach(SpaceXLaunchModel launch in SpaceXAllLaunches)
+            {
+                Console.WriteLine(launch.MissionName);
+            }
+
+            // get launch service providers
+
         }
     }
 }
